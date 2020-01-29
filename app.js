@@ -1,11 +1,16 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 
 const rotaProdutos = require('./routes/produtos');
 const rotaPedidos = require('./routes/pedidos');
 
 app.use(morgan('dev')); //exibe um log no terminal
+app.use(bodyParser.urlencoded({extended: false})); //APENAS DADOS SIMPLES
+app.use(bodyParser.json()); //somente json de entrada no body
+
+
 app.use('/produtos', rotaProdutos);
 app.use('/pedidos', rotaPedidos);
 
